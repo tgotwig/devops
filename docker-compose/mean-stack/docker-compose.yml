@@ -1,0 +1,10 @@
+version: "3"
+services:
+  mongo:
+    image: "mongo"
+    container_name: mean-stack-mongo
+    ports: ["27017:27017"]
+  mean_mytasklist:
+    build: .
+    container_name: mean-stack-mean_mytasklist
+    ports: ["3000:3000"]
