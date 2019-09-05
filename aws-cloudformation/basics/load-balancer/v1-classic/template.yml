@@ -155,7 +155,7 @@ Resources:
 
         git clone https://github.com/TGotwig/devops-templates
         sudo chmod -R 777 /devops-templates
-        cd /devops-templates/utils/http-base && git stash && git checkout update && npm install && nohup npm start &
+        cd /devops-templates/utils/http-base && npm install && nohup npm start &
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
