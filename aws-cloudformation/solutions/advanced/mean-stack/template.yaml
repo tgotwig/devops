@@ -158,7 +158,7 @@ Resources:
 
           git clone https://github.com/TGotwig/devops-templates
           sudo chmod -R 777 /devops-templates
-          cd /devops-templates/docker/mean-stack && sudo docker build -t mean_mytasklist . && sudo docker run --rm -d -p 80:3000 -e mongo_connection="mongodb://user:pw@${MongoInstance.PublicIp}:27017" mean_mytasklist
+          cd /devops-templates/aws-cloudformation/solutions/advanced/mean-stack && sudo docker build -t mean_mytasklist . && sudo docker run --rm -d -p 80:3000 -e mongo_connection="mongodb://user:pw@${MongoInstance.PublicIp}:27017" mean_mytasklist
   MongoInstance:
     Type: AWS::EC2::Instance
     Properties:

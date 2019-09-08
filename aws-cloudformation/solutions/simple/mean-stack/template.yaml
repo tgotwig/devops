@@ -53,10 +53,10 @@ Resources:
 
         # download repo and fire up docker-compose file
         git clone https://github.com/TGotwig/devops-templates
-        cd /devops-templates/docker/mean-stack && sudo docker-compose up -d
+        cd /devops-templates/aws-cloudformation/solutions/simple/mean-stack && sudo docker-compose up -d
 
         # setup to start after each boot
-        (crontab -l 2>/dev/null; echo "@reboot sudo service docker start && cd /devops-templates/docker/mean-stack && sudo docker-compose up -d") | crontab -
+        (crontab -l 2>/dev/null; echo "@reboot sudo service docker start && cd /devops-templates/aws-cloudformation/solutions/simple/mean-stack && sudo docker-compose up -d") | crontab -
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
