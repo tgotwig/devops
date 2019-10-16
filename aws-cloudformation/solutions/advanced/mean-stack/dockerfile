@@ -2,5 +2,6 @@ FROM node:12-alpine
 RUN apk add git
 RUN git clone https://github.com/tgotwig/mean_mytasklist
 RUN cd mean_mytasklist && git checkout update && npm install
-RUN sed -i "s/IP_ADRESS/$(wget http://ipecho.net/plain -O - -q ; echo)/g" mean_mytasklist/views/index.html
-CMD cd mean_mytasklist && mongo_connection="$mongo_connection" npm start
+CMD sed -i "s/IP_ADRESS/$(wget http://ipecho.net/plain -O - -q ; echo)/g" mean_mytasklist/views/index.html \
+    && cd mean_mytasklist \
+    && mongo_connection="$mongo_connection" npm start
