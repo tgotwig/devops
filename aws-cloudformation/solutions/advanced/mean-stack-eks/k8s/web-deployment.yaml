@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: tgotwig/mean_mytasklist:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: mongo_ip
+              value: mongo-service
+            - name: mongo_user
+              value: user
+            - name: mongo_pw
+              value: pw
