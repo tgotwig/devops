@@ -156,19 +156,13 @@ Resources:
           sudo service docker start
           sudo usermod -a -G docker ec2-user
 
-          git clone https://github.com/TGotwig/devops-templates
-          sudo chmod -R 777 /devops-templates
-          cd /devops-templates/aws-cloudformation/solutions/advanced/mean-stack
-          # sudo git reset --hard
-          # sudo git checkout advanced-mean-stack
-          sudo docker build -t mean_mytasklist .
           sudo docker run \
             --rm -d \
             -p 80:3000 \
             -e mongo_ip="${MongoInstance.PublicIp}" \
             -e mongo_user="user" \
             -e mongo_pw="pw" \
-            mean_mytasklist
+            tgotwig/mean_mytasklist:latest
   MongoInstance:
     Type: AWS::EC2::Instance
     Properties:
