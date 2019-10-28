@@ -4,19 +4,13 @@ Parameters:
     Description: WebServer EC2 instance type
     Type: String
     Default: t2.nano
-    ConstraintDescription: must be a valid EC2 instance type.
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instances
     Type: AWS::EC2::KeyPair::KeyName
-    ConstraintDescription: must be the name of an existing EC2 KeyPair.
   SSHLocation:
     Description: The IP address range that can be used to SSH to the EC2 instances
     Type: String
-    MinLength: "9"
-    MaxLength: "18"
     Default: 0.0.0.0/0
-    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
-    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
 Resources:
   ElasticLoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
@@ -27,15 +21,6 @@ Resources:
         - LoadBalancerPort: "80"
           InstancePort: "80"
           Protocol: HTTP
-      HealthCheck:
-        Target: HTTP:80/
-        HealthyThreshold: "3"
-        UnhealthyThreshold: "5"
-        Interval: "30"
-        Timeout: "5"
-      ConnectionDrainingPolicy:
-        Enabled: "true"
-        Timeout: "300"
   WebServerGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
@@ -44,10 +29,6 @@ Resources:
       MinSize: "2"
       MaxSize: "2"
       LoadBalancerNames: [!Ref "ElasticLoadBalancer"]
-    UpdatePolicy:
-      AutoScalingRollingUpdate:
-        MinInstancesInService: "1"
-        MaxBatchSize: "1"
   LaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
