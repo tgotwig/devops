@@ -12,5 +12,8 @@ postgres:
 # webserver
 # --------------------
 
+httpd:
+	docker run --rm -p 80:80 -v `pwd`/www:/usr/local/apache2/htdocs/ httpd
+
 nginx:
 	docker container run --rm -p 80:80 -v `pwd`/www:/usr/share/nginx/html nginx
