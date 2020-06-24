@@ -1,2 +1,2 @@
 nginx-httpd:
-	cd docker/nginx-httpd && docker-compose up && docker-compose rm -fsv
+	cd compose-files/nginx-httpd && docker-compose up && docker-compose rm -fsv
