@@ -2,6 +2,14 @@
 # databases
 # --------------------
 
+es:
+	docker container run -d --rm \
+		-p 9200:9200 \
+		-p 9300:9300 \
+		-v `pwd`/data/es:/usr/share/elasticsearch/data \
+		-e "discovery.type=single-node" \
+		elasticsearch:7.8.0
+
 mysql:
 	docker container run -d --rm \
 		-p 3306:3306 \
