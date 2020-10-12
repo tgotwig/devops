@@ -36,7 +36,7 @@ Resources:
         - Ref: InstanceSecurityGroup
       KeyName:
         Ref: KeyName
-      ImageId: "ami-0b898040803850657"
+      ImageId: "ami-00a205cb8e06c3c4e"
       UserData: !Base64 |
         #!/bin/bash
         sudo yum update -y && sudo yum install -y git
