@@ -2,6 +2,7 @@ data
 .DS_Store
 query.*.txt
 sites
+parameters.json
 
 ####################
 # Node
