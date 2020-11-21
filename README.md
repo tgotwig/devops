@@ -1,3 +1,5 @@
+<img src="https://alphaville.github.io/optimization-engine/img/docker.gif" width="20%" alt="docker wales" align="right">
+
 # devops-templates
 
 Repository with some DevOps templates ☁️
