@@ -7,14 +7,14 @@ upAndRm:
 
 up:
 	aws cloudformation create-stack \
-    --stack-name ${stack-name} \
-    --profile ${profile} \
-    --region ${region} \
-    --template-body file://template.yaml \
-    --parameters file://parameters.json
+        --stack-name ${stack-name} \
+        --profile ${profile} \
+        --region ${region} \
+        --template-body file://template.yaml \
+        --parameters file://parameters.json
 
 rm:
 	aws cloudformation delete-stack \
-    --stack-name ${stack-name} \
-    --profile ${profile} \
-    --region ${region}
+        --stack-name ${stack-name} \
+        --profile ${profile} \
+        --region ${region}
