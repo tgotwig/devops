@@ -34,7 +34,7 @@ Resources:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
       KeyName: !Ref "KeyName"
-      ImageId: "ami-0b898040803850657"
+      ImageId: "ami-047e03b8591f2d48a"
       SecurityGroups:
         - Ref: WebSecurityGroup
       InstanceType: !Ref "InstanceType"
@@ -64,7 +64,7 @@ Resources:
         - Ref: MongoSecurityGroup
       KeyName:
         Ref: KeyName
-      ImageId: "ami-0b898040803850657"
+      ImageId: "ami-047e03b8591f2d48a"
       UserData: !Base64 |
         #!/bin/bash
         sudo yum update -y
