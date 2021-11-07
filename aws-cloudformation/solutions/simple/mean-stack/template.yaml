@@ -10,22 +10,6 @@ Parameters:
     Type: String
     Default: t2.nano
     ConstraintDescription: must be a valid EC2 instance type.
-  SSHLocation:
-    Description: The IP address range that can be used to SSH to the EC2 instances
-    Type: String
-    MinLength: "9"
-    MaxLength: "18"
-    Default: 0.0.0.0/0
-    AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})"
-    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
-  HTTPLocation:
-    Description: The IP address range that can be used to HTTP to the EC2 instances
-    Type: String
-    MinLength: "9"
-    MaxLength: "18"
-    Default: 0.0.0.0/0
-    AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})"
-    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
 Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
@@ -47,14 +31,13 @@ Resources:
         sudo usermod -a -G docker ec2-user
 
         # install docker-compose
-        sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
+        sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
         sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
         # download repo and fire up docker-compose file
-        git clone https://github.com/TGotwig/devops-templates
-        cd /devops-templates/aws-cloudformation/solutions/simple/mean-stack ;\
-          sudo docker-compose up -d
+        git clone https://github.com/TGotwig/devops
+        sudo docker-compose --project-directory /devops/aws-cloudformation/solutions/simple/mean-stack up -d
 
         # setup to start after each boot
         (crontab -l 2>/dev/null; echo "@reboot sudo service docker start && cd /devops-templates/aws-cloudformation/solutions/simple/mean-stack && sudo docker-compose up -d") | crontab -
@@ -64,12 +47,10 @@ Resources:
       GroupDescription: Enable SSH and HTTP access
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: "22"
-          ToPort: "22"
-          CidrIp:
-            Ref: SSHLocation
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
-          FromPort: "80"
-          ToPort: "80"
-          CidrIp:
-            Ref: HTTPLocation
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
